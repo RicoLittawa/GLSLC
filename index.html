@@ -112,6 +112,22 @@
       width: 300px; /* Adjust size as needed */
       height: auto;
     }
+    .result-container h1 {
+      color: white;
+      padding: 30px 0;
+    }
+    .result {
+      width: 100%;
+      height: 300px;
+      border: 10px solid #ffd700;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .result h1 {
+      font-size: 80px;
+    }
   </style>
 
   <body>
@@ -194,7 +210,11 @@
               <button type="submit" class="btn btn-lg btn-primary w-100 mb-2">
                 Submit
               </button>
-              <button type="submit" class="btn btn-lg btn-danger w-100 mb-2">
+              <button
+                type="button"
+                class="btn btn-lg btn-danger w-100 mb-2"
+                onclick="resetResult()"
+              >
                 Reset
               </button>
             </form>
@@ -205,9 +225,9 @@
         </div>
       </div>
       <div class="result-container">
-        <h1>Your table number is :</h1>
+        <h1 class="title-result">Your table number is :</h1>
         <div class="result">
-              20         
+          <h1 id="result"></h1>
         </div>
       </div>
     </main>
@@ -258,19 +278,15 @@
           // Determine the table number based on the ticket number
           var tableNumber = Math.ceil(ticketNumber / ticketsPerTable);
 
-          // SweetAlert success message
-          Swal.fire({
-            icon: "success",
-            title: "Submitted",
-            text: `Your table number is: ${tableNumber}`,
-            confirmButtonText: "OK",
-          }).then((result) => {
-            // Optionally, do something after the user clicks "OK"
-            if (result.isConfirmed) {
-              document.getElementById("myForm").reset();
-            }
-          });
+          document.getElementById("result").textContent = tableNumber;
         }
+      }
+      function resetResult() {
+        document.getElementById("result").textContent =
+          "Your table number will appear here.";
+
+        // Reset the form
+        document.getElementById("myForm").reset();
       }
     </script>
   </body>
